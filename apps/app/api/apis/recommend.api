@@ -1,0 +1,24 @@
+syntax = "v1"
+
+info(
+    title: "type title here"
+    desc: "type desc here"
+    author: "type author here"
+    email: "type email here"
+    version: "type version here"
+)
+
+import ("product.api")
+
+type (
+    RecommendRequest {
+        Cursor int64 `json:"cursor"`
+        Ps     int64 `form:"ps,default=20"` // 每页大小
+    }
+
+    RecommendResponse {
+        Products      []*Product `json:"products"`
+        IsEnd         bool       `json:"is_end"`         // 是否最后一页
+        RecommendTime int64      `json:"recommend_time"` // 商品列表最后一个商品的推荐时间
+    }
+)

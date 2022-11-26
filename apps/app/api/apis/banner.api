@@ -1,0 +1,21 @@
+syntax = "v1"
+
+info(
+    title: "type title here"
+    desc: "type desc here"
+    author: "type author here"
+    email: "type email here"
+    version: "type version here"
+)
+
+type (
+    HomeBannerResponse {
+        Banners []*Banner `json:"banners"`
+    }
+
+    Banner {
+        ID   int64  `json:"id"`
+        Name string `json:"name"` // 名称
+        URL  string `json:"url"`  // 图片地址
+    }
+)

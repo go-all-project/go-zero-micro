@@ -1,0 +1,26 @@
+syntax = "v1"
+
+info(
+    title: "type title here"
+    desc: "type desc here"
+    author: "type author here"
+    email: "type email here"
+    version: "type version here"
+)
+
+import ("product.api")
+
+type (
+    CategoryListRequest {
+        Cursor   int64  `form:"cursor"`        // 分页游标
+        Ps       int64  `form:"ps,default=20"` // 每页大小
+        Category string `form:"category"`      // 分类
+        Sort     string `form:"sort"`          // 排序
+    }
+
+    CategoryListResponse {
+        Products []*Product `json:"products"`
+        IsEnd    bool       `json:"is_end"`
+        LastVal  int64      `json:"last_val"`
+    }
+)

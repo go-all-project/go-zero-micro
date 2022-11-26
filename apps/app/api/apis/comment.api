@@ -1,0 +1,33 @@
+syntax = "v1"
+
+info(
+    title: "type title here"
+    desc: "type desc here"
+    author: "type author here"
+    email: "type email here"
+    version: "type version here"
+)
+
+
+type (
+    Comment {
+        ID         int64    `json:"id"`          // 评论ID
+        ProductID  int64    `json:"product_id"`  // 商品ID
+        Content    string   `json:"content"`     // 评论内容
+        Images     []*Image `json:"images"`      // 评论图片
+        User       *User    `json:"user"`        // 用户信息
+        CreateTime int64    `json:"create_time"` // 评论时间
+        UpdateTime int64    `json:"update_time"` // 更新时间
+    }
+
+    User {
+        ID     int64  `json:"id"`     // 用户ID
+        Name   string `json:"name"`   // 用户名
+        Avatar string `json:"avatar"` // 头像
+    }
+
+    Image {
+        ID  int64  `json:"id"`
+        URL string `json:"url"`
+    }
+)
