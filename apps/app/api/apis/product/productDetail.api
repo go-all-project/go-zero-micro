@@ -9,7 +9,7 @@ info(
 )
 
 import (
-    "apis/product.api"
+    "apis/product/product.api"
     "apis/comment.api"
 )
 

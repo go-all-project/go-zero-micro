@@ -1,18 +1,18 @@
 syntax = "v1"
 
 import (
-	"apis/userReceiveAddress.api"
-	"apis/user.api"
-	"apis/userCollection.api"
-	"apis/order.api"
+	"apis/user/userReceiveAddress.api"
+	"apis/user/user.api"
+	"apis/user/userCollection.api"
+	"apis/product/productDetail.api"
+	"apis/product/productComment.api"
+	"apis/order/order.api"
+	"apis/order/orderList.api"
 	"apis/banner.api"
 	"apis/flashSale.api"
 	"apis/category.api"
 	"apis/recommend.api"
 	"apis/cardList.api"
-	"apis/orderList.api"
-	"apis/productDetail.api"
-	"apis/productComment.api"
 )
 
 service api-api {
