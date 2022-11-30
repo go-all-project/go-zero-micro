@@ -9,8 +9,8 @@ info(
 )
 
 import (
-    "product.api"
-    "comment.api"
+    "apis/product.api"
+    "apis/comment.api"
 )
 
 type (

@@ -8,7 +8,7 @@ info(
     version: "type version here"
 )
 
-import ("comment.api")
+import ("apis/comment.api")
 
 type (
     ProductCommentRequest {
