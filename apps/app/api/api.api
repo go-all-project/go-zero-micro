@@ -63,8 +63,8 @@ service api-api {
 
 //need login
 @server(
-	prefix: v1/user
-	group: user
+	prefix: v1/user // 路由前缀
+	group: user // 分组创建
 	jwt: JwtAuth //use jwt
 )
 service api-api {

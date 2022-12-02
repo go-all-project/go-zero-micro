@@ -2,6 +2,10 @@ package logic
 
 import (
 	"context"
+	"go_zero/apps/order/rpc/order"
+	"go_zero/apps/product/rcp/product"
+	"strconv"
+	"strings"
 
 	"go_zero/apps/app/api/internal/svc"
 	"go_zero/apps/app/api/internal/types"
@@ -24,7 +28,29 @@ func NewOrderListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderLi
 }
 
 func (l *OrderListLogic) OrderList(req *types.OrderListRequest) (resp *types.OrderListResponse, err error) {
-	// todo: add your logic here and delete this line
+	orderRet, err := l.svcCtx.OrderRPC.Orders(l.ctx, &order.OrdersRequest{UserId: req.UID})
+	if err != nil {
+		return nil, err
+	}
 
-	return
+	var pids []string
+	for _, o := range orderRet.Orders {
+		pids = append(pids, strconv.Itoa(int(o.ProductId)))
+	}
+
+	productRet, err := l.svcCtx.ProductRPC.Products(l.ctx, &product.ProductRequest{ProductIds: strings.Join(pids, ",")})
+	if err != nil {
+		return nil, err
+	}
+
+	var orders []*types.Order
+	for _, o := range orderRet.Orders {
+		p := productRet.Products[o.ProductId]
+
+		orders = append(orders, &types.Order{
+			OrderID:     o.OrderId,
+			ProductName: p.Name,
+		})
+	}
+	return &types.OrderListResponse{Orders: orders}, nil
 }
