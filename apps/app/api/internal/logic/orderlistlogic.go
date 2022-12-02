@@ -28,6 +28,8 @@ func NewOrderListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderLi
 }
 
 func (l *OrderListLogic) OrderList(req *types.OrderListRequest) (resp *types.OrderListResponse, err error) {
+	logx.Infow("日志打印", logx.Field("uid", req.UID))
+
 	orderRet, err := l.svcCtx.OrderRPC.Orders(l.ctx, &order.OrdersRequest{UserId: req.UID})
 	if err != nil {
 		return nil, err
@@ -52,5 +54,6 @@ func (l *OrderListLogic) OrderList(req *types.OrderListRequest) (resp *types.Ord
 			ProductName: p.Name,
 		})
 	}
+
 	return &types.OrderListResponse{Orders: orders}, nil
 }

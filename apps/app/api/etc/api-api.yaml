@@ -2,6 +2,16 @@ Name: api-api
 Host: 0.0.0.0
 Port: 8888
 
+Log:
+  ServiceName: bff # 服务名字
+  Level: info # 打印登记
+  Mode: console # 输出位置
+  Encoding: plain # 展示格式
+  Compress: true # 是否隔一段时间打包为 zip
+  KeepDays: 7 # 保留时间
+  StackCooldownMillis: 100
+
+# 配置连接 etcd 服务中的 rpc
 OrderRPC:
   Etcd:
     Hosts:
