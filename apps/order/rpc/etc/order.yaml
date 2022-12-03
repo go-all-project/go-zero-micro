@@ -4,3 +4,6 @@ Etcd:
   Hosts:
   - 127.0.0.1:2379
   Key: order.rpc
+
+MySQL:
+  DNS: root:1D007648b4f8@(127.0.0.1:3306)/gozero?charset=utf8

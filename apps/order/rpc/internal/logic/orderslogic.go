@@ -2,12 +2,12 @@ package logic
 
 import (
 	"context"
+	"fmt"
+	"github.com/zeromicro/go-zero/core/logx"
+	"go_zero/apps/order/model"
 	"go_zero/apps/order/rpc/internal/svc"
 	"go_zero/apps/order/rpc/pb"
 	"google.golang.org/grpc/metadata"
-
-	"fmt"
-	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type OrdersLogic struct {
@@ -29,6 +29,12 @@ func (l *OrdersLogic) Orders(in *pb.OrdersRequest) (*pb.OrdersResponse, error) {
 		tmp := md.Get("username")
 		fmt.Printf("rpc metadata 传参 %v \n", tmp)
 	}
+
+	user := models.User{
+		Mobile: in.UserId,
+	}
+
+	_ = l.svcCtx.DB.Create(&user)
 
 	return &pb.OrdersResponse{}, nil
 }
