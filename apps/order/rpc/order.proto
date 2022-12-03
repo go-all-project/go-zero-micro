@@ -26,6 +26,7 @@ message OrdersRequest {
   int32 ps = 4;
 }
 
+// Order 对应文件夹的 order
 service Order {
   rpc Orders(OrdersRequest) returns(OrdersResponse);
 }
