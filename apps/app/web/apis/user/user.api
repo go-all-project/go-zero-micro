@@ -1,13 +1,5 @@
 syntax = "v1"
 
-info(
-    title: "用户管理"
-    desc: "用户管理"
-    author: "刘羽禅"
-    email: "18500606035@163.com"
-    version: "v1"
-)
-
 type UserInfo {
     Id         uint64 `json:"id"`          //用户ID
     Username   string `json:"username"`    //用户名
@@ -41,4 +33,4 @@ type (
         UserInfo UserInfo `json:"userInfo"`
     }
 )
-    //用户详情
+//用户详情

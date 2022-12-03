@@ -1,0 +1,50 @@
+syntax = "v1"
+
+info(
+	title: "总和"
+	desc: "总和所有服务"
+	author: "作者"
+	email: "邮件"
+	version: "0.01"
+)
+
+import (
+	"apis/user/user.api"
+	"apis/banner.api"
+	"apis/recommend.api"
+)
+
+service web-api {
+	@doc "首页Banner"
+	@handler homeBannerHandler
+	get /v1/home/banner returns (HomeBannerResponse)
+	
+	@doc "推荐商品列表"
+	@handler recommendHandler
+	get /v1/recommend (RecommendRequest) returns (RecommendResponse)
+}
+
+//========================> user v1 <===================================
+//no need login
+@server(
+	prefix: v1/user // 路由前缀
+	group: user // 将生成的文件分组到 user 目录下，不是路由前缀分组
+	middleware: login // 中间件
+)
+service web-api {
+	@doc "login"
+	@handler login
+	post /login (LoginReq) returns (LoginResp)
+}
+
+//need login
+@server(
+	prefix: v1/user // 路由前缀
+	group: user // 分组创建
+	jwt: JwtAuth //use jwt
+)
+service web-api {
+	@doc "get user info"
+	@handler detail
+	post /info (UserInfoReq) returns (UserInfoResp)
+}
