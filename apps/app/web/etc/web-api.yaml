@@ -1,0 +1,42 @@
+Name: web-api
+Host: 0.0.0.0
+Port: 8888
+
+Log:
+  ServiceName: web_bff # 服务名字
+  Level: info # 打印登记
+  Mode: console # 输出位置
+  Encoding: plain # 展示格式
+  Compress: true # 是否隔一段时间打包为 zip
+  KeepDays: 7 # 保留时间
+  StackCooldownMillis: 100
+  Path: logs
+
+# jwtAuth
+JwtAuth:
+  AccessSecret: ae0536f9-6450-4606-8e13-5a19ed505da0
+  AccessExpire: 86400
+
+# 配置连接 etcd 服务中的 rpc
+OrderRPC:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: order.rpc
+  NonBlock: true
+#  服务直连
+#  Endpoints:
+#    - 127.0.0.1:8080
+
+ProductRPC:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: product.rpc
+  NonBlock: true
+ReplyRPC:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: reply.rpc
+  NonBlock: true # 修改为若依赖，即是这个 rpc 服务没有执行也不影响 bff 启动
