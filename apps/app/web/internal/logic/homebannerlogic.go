@@ -25,7 +25,7 @@ func NewHomeBannerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *HomeBa
 func (l *HomeBannerLogic) HomeBanner() (resp *types.HomeBannerResponse, err error) {
 	logx.Infow("日志打印", logx.Field("uid", "test"))
 
-	if _, err = l.svcCtx.OrderRPC.Orders(l.ctx, &order.OrdersRequest{UserId: 1}); err != nil {
+	if _, err = l.svcCtx.OrderRPCClient.Orders(l.ctx, &order.OrdersRequest{UserId: 1}); err != nil {
 		return nil, err
 	}
 
