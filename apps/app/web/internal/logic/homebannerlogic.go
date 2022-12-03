@@ -2,13 +2,10 @@ package logic
 
 import (
 	"context"
+	"github.com/zeromicro/go-zero/core/logx"
 	"go_zero/apps/app/web/internal/svc"
 	"go_zero/apps/app/web/internal/types"
 	"go_zero/apps/order/rpc/order"
-	"go_zero/apps/product/rcp/product"
-	"strings"
-
-	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type HomeBannerLogic struct {
@@ -29,11 +26,6 @@ func (l *HomeBannerLogic) HomeBanner() (resp *types.HomeBannerResponse, err erro
 	logx.Infow("日志打印", logx.Field("uid", "test"))
 
 	if _, err = l.svcCtx.OrderRPC.Orders(l.ctx, &order.OrdersRequest{UserId: 1}); err != nil {
-		return nil, err
-	}
-
-	pid := []string{"1", "2"}
-	if _, err = l.svcCtx.ProductRPC.Products(l.ctx, &product.ProductRequest{ProductIds: strings.Join(pid, ",")}); err != nil {
 		return nil, err
 	}
 

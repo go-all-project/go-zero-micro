@@ -5,15 +5,13 @@ import (
 	"github.com/zeromicro/go-zero/zrpc"
 	"go_zero/apps/app/web/internal/config"
 	"go_zero/apps/app/web/internal/middleware"
-	"go_zero/apps/order/rpc/orderclient"
-	"go_zero/apps/product/rcp/productclient"
+	"go_zero/apps/order/rpc/order"
 )
 
 type ServiceContext struct {
 	Config config.Config
 	// 在这里注册BFF中的 RPC 服务
-	OrderRPC   orderclient.Order
-	ProductRPC productclient.Product
+	OrderRPC order.Order
 
 	// 中间件
 	login rest.Middleware
@@ -21,9 +19,8 @@ type ServiceContext struct {
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
-		Config:     c,
-		OrderRPC:   orderclient.NewOrder(zrpc.MustNewClient(c.OrderRPC)),
-		ProductRPC: productclient.NewProduct(zrpc.MustNewClient(c.ProductRPC)),
-		login:      middleware.NewLoginMiddleware().Handle,
+		Config:   c,
+		OrderRPC: order.NewOrder(zrpc.MustNewClient(c.OrderRPC)),
+		login:    middleware.NewLoginMiddleware().Handle,
 	}
 }
