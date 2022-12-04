@@ -17,14 +17,14 @@ type ServiceContext struct {
 	OrderRPCClient order.Order
 
 	// 中间件
-	login rest.Middleware
+	Login rest.Middleware
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config:         c,
 		OrderRPCClient: order.NewOrder(zrpc.MustNewClient(c.OrderRPC, zrpc.WithUnaryClientInterceptor(testClientInterceptor))),
-		login:          middleware.NewLoginMiddleware().Handle,
+		Login:          middleware.NewLoginMiddleware().Handle,
 	}
 }
 
